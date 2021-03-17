@@ -27,12 +27,12 @@ String localeToString(Locale locale)
 	return locale.countryCode != null ? '${locale.languageCode}_${locale.countryCode}' : locale.languageCode;
 }
 
-String translate(String key, {Map<String, dynamic> args})
+String translate(String key, {Map<String, dynamic>? args})
 {
 	return Localization.instance.translate(key, args: args);
 }
 
-String translatePlural(String key, num value, {Map<String, dynamic> args})
+String translatePlural(String key, num value, {Map<String, dynamic>? args})
 {
 	return Localization.instance.plural(key, value, args: args);
 }
@@ -41,8 +41,8 @@ Future changeLocale(BuildContext context, String localeCode) async
 {
 	if (localeCode != null)
 	{
-		await LocalizedApp.of(context).delegate.changeLocale(localeFromString(localeCode));
+		await LocalizedApp.of(context)!.delegate.changeLocale(localeFromString(localeCode));
 
-		LocalizationProvider.of(context).state.onLocaleChanged();
+		LocalizationProvider.of(context)!.state!.onLocaleChanged();
 	}
 }

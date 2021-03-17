@@ -7,7 +7,7 @@ import 'flutter_translate.dart';
 
 class LocalizationDelegate extends LocalizationsDelegate<Localization>
 {
-    Locale _currentLocale;
+    Locale? _currentLocale;
 
     final Locale fallbackLocale;
 
@@ -15,11 +15,11 @@ class LocalizationDelegate extends LocalizationsDelegate<Localization>
 
     final Map<Locale, String> supportedLocalesMap;
 
-    final ITranslatePreferences preferences;
+    final ITranslatePreferences? preferences;
 
-    LocaleChangedCallback onLocaleChanged;
+    LocaleChangedCallback? onLocaleChanged;
 
-    Locale get currentLocale => _currentLocale;
+    Locale? get currentLocale => _currentLocale;
 
     LocalizationDelegate._(this.fallbackLocale, this.supportedLocales, this.supportedLocalesMap, this.preferences);
 
@@ -39,12 +39,12 @@ class LocalizationDelegate extends LocalizationsDelegate<Localization>
 
         if(onLocaleChanged != null)
         {
-            await onLocaleChanged(locale);
+            await onLocaleChanged!(locale);
         }
 
         if(!isInitializing && preferences != null)
         {
-            await preferences.savePreferredLocale(locale);
+            await preferences!.savePreferredLocale(locale);
         }
     }
 
@@ -66,10 +66,10 @@ class LocalizationDelegate extends LocalizationsDelegate<Localization>
     @override
     bool shouldReload(LocalizationsDelegate<Localization> old) => true;
 
-    static Future<LocalizationDelegate> create({@required String fallbackLocale,
-                                                @required List<String> supportedLocales,
+    static Future<LocalizationDelegate> create({required String fallbackLocale,
+                                                required List<String> supportedLocales,
                                                 String basePath = Constants.localizedAssetsPath,
-                                                ITranslatePreferences preferences}) async
+                                                ITranslatePreferences? preferences}) async
     {
         WidgetsFlutterBinding.ensureInitialized();
 
@@ -97,7 +97,7 @@ class LocalizationDelegate extends LocalizationsDelegate<Localization>
 
         try
         {
-            locale = await preferences.getPreferredLocale();
+            locale = await preferences!.getPreferredLocale();
         }
         catch(e)
         {

@@ -5,11 +5,13 @@ homepage: https://leadcode.dev
 repository: https://github.com/bratan/flutter_translate
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  flutter_device_locale: ^0.4.0
+  flutter_device_locale:
+    git: https://github.com/educup/flutter_device_locale.git
+  collection: ^1.15.0
 
 flutter:
